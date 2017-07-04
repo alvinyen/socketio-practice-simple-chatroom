@@ -14,7 +14,20 @@
 - 沒有設定filename的話預設會bundle出main.js而不是bundle.js...
     - ![](https://i.imgur.com/WPjHQhl.png)
 
-- io.sockets.emit
+<hr>
+<hr>
+
+## 『 regular event and broadcasting event 』
+- io.socket"s".emit
 - socket.broadcast.emit
 
-## [ 4. io.sockets.emit ]
+<hr>
+<hr>
+
+## 『 4. io.socket"s".emit 』
+- 送chat message到各個socket.io-client
+
+<hr>
+<hr>
+
+## 『 5. socket.broadcast.emit 』
