@@ -1,10 +1,19 @@
 const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
 
-// app setup
+const socketIo = require('socket.io');
+
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackConfig = require('./webpack.config');
+
 const app = express();
-const server = app.listen(4000, () => {
-  console.log('listening to requests on port 4000');
-});
+const server = http.createServer(app);
+const io = socketIo(server);
 
-//static files
-app.use(express.static('public'));
+app.use(express.static(`${__dirname}/public`));// server static file
+app.use(webpackDevMiddleware(webpack(webpackConfig))); // for webpack setting
+app.use(bodyParser.urlencoded({ extend: true }));
+
+server.listen(3000);
