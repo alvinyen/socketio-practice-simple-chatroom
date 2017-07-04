@@ -7,14 +7,19 @@ class App extends Component {
     this.state = { 
       handle: '',
       message: '',
-      messageData: []
+      messageData: [],
+      feedback: ''
      };
   }
   componentDidMount = () => {
     this.socket = io('/'); // connect to socket-io server
     // console.log(this.socket);
     this.socket.on('chat', (data) => {
+      this.setState({ feedback: '' });
       this.setState({ messageData: [...this.state.messageData, data] });
+    });
+    this.socket.on('typing', (handle) => {
+      this.setState({ feedback: <p><em>{ `${handle} is typing message...` }</em></p> });
     });
   }
   handleChange = (event) => {
@@ -32,12 +37,16 @@ class App extends Component {
     // console.log(`${event.target.name}: ${this.state[event.target.name]}`);
   }
   handleSendClick = (event) => {
-    console.log(this.socket);
+    
     this.socket.emit('chat', {
       message: this.state.message,
       handle: this.state.handle
     });
     this.setState({ message: '', handle: '' });
+  }
+  handleFeedbackDivKeyPress = (event) => {
+    console.log(this.state.handle);
+    this.socket.emit('typing', this.state.handle);
   }
   render() {
     const { messageData } = this.state;
@@ -49,6 +58,7 @@ class App extends Component {
         <h1>socketio-practice-simple-chatroom</h1>
         <div id="chat-window">
           <div id="output">{messageParagraph}</div>
+          <div id="feedback">{this.state.feedback}</div>
         </div>
         <input 
           type="text" 
@@ -63,7 +73,8 @@ class App extends Component {
           name="message" 
           placeholder="message.."
           value={this.state.message}
-          onChange={this.handleChange} />
+          onChange={this.handleChange} 
+          onKeyPress={this.handleFeedbackDivKeyPress} />
         <button id="send" onClick={this.handleSendClick}>Send</button>
       </div>
     );

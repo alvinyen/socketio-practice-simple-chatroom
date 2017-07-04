@@ -22,6 +22,9 @@ io.on('connection', (socket) => {
   socket.on('chat', (data) => {
     io.sockets.emit('chat', data);
   });
+  socket.on('typing', (handle) => {
+    socket.broadcast.emit('typing', handle);
+  });
 });
 
 server.listen(3000);

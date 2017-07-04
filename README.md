@@ -18,8 +18,9 @@
 <hr>
 
 ## 『 regular event and broadcasting event 』
-- io.socket"s".emit
-- socket.broadcast.emit
+- on server side
+    - io.socket"s".emit
+    - socket.broadcast.emit
 
 <hr>
 <hr>
@@ -30,4 +31,10 @@
 <hr>
 <hr>
 
-## 『 5. socket.broadcast.emit 』
+## 『 5. using socket.broadcast.emit broadcasting message 』
+- 在各個socket.io-client呈現"xxx用戶正在輸入訊息"
+- 掛一個keyPress的event到message div
+- client side：this.socket.emit('typing')
+- server side：socket.broadcast.emit
+- !!important：送出訊息之後記得清掉feedback中的內容 => 在接到訊息的地方去做清掉的動作
+- ![](https://i.imgur.com/O02CtXh.png)
