@@ -13,3 +13,6 @@
 - 詳細webpack設定可參考[youtube-presentation-redux-socketio-practice](https://github.com/alvinyen/youtube-presentation-redux-socketio-practice)
 - 沒有設定filename的話預設會bundle出main.js而不是bundle.js...
     - ![](https://i.imgur.com/WPjHQhl.png)
+
+- io.sockets.emit
+- socket.broadcast.emit

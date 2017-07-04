@@ -19,6 +19,9 @@ app.use(bodyParser.urlencoded({ extend: true }));
 const io = socketIo(server);
 io.on('connection', (socket) => {
   console.log('made socket connection', socket.id);
+  socket.on('chat', (data) => {
+    io.sockets.emit('chat', data);
+  });
 });
 
 server.listen(3000);
