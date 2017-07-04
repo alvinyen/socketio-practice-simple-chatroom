@@ -16,3 +16,5 @@
 
 - io.sockets.emit
 - socket.broadcast.emit
+
+## [ 4. io.sockets.emit ]
