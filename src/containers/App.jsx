@@ -62,6 +62,7 @@ class App extends Component {
     if (event.keyCode === 13) {
       if ( this.state.handle.length === 0 ) {
         alert('pls enter your name~');
+        return;
       }
       this.setState({ named: true });
     }
