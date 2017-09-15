@@ -60,6 +60,9 @@ class App extends Component {
   }
   handleHandleKeyUp = (event) => {
     if (event.keyCode === 13) {
+      if ( this.state.handle.length === 0 ) {
+        alert('pls enter your name~');
+      }
       this.setState({ named: true });
     }
   }
